@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+
+            var formData = {
+                login: document.querySelector('input[name="login"]').value,
+                email: document.querySelector('input[name="email"]').value,
+                password: document.querySelector('input[name="password"]').value
+            };
+
+            fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = '/login';
+                    } else {
+                        window.location.href = '/error_page';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</head>
+<body>
+<div class="form">
+    <form onsubmit="submitForm(event)">
+        <div class="sign-up__content">
+            <h2 class="sign-up__title">Register</h2>
+            <input class="sign-up__inp" type="text" name="login" placeholder="User name" required="required"/>
+            <input class="sign-up__inp" type="email" name="email" placeholder="Email" required="required"/>
+            <input class="sign-up__inp" type="password" name="password" placeholder="Password" required="required"/>
+        </div>
+        <div class="sign-up__buttons">
+            <a href="/">Main</a>
+            <input type="submit" value="Register" name="Register"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+com\example\simpleform\repository\UserRepository.class
+com\example\simpleform\SimpleFormApplication.class
+com\example\simpleform\controller\UserController.class
+com\example\simpleform\model\UserModel.class
+com\example\simpleform\service\UserService.class
